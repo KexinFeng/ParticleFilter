@@ -1,5 +1,5 @@
 import numpy as np
-import re
+import re,sys,random
 
 dic_table = {'low': 0, 'med': 1, 'high':2}
 
@@ -24,7 +24,6 @@ class ParFilter:
                     self.readLine(line, button)
                 else:
                     button += 1
-                    print(self.evidence)
 
 
     def readLine(self, line, button):
@@ -146,12 +145,38 @@ class ParFilter:
 
 
 
-def main():
-    solver = ParFilter("waterTable.txt")
-    ev = [1,1,0,0,1,1,1,1,0,1]
-    # ev = [0, 0, 1]
+def main(argv=sys.argv):
+    print('Usage: $python3 Partile_Filter.py <filename> <evidence> <N>')
+    print('Example: $python3 Particle_Filter.py waterTable.txt 1,1,0,0,1,1,1,1,0,1 100000')
+
+    # file = "prob345.txt"
+    # N = 10**4
+    # input = 'P(g|k,~b,c)'
+
+    if len(argv) == 4:
+        # input = 'P(' + argv[2] + ')'
+        # print('input:', input)
+        filename = argv[1]
+        evidence = re.split('\,|\]|\]',argv[2])
+        N = int(argv[3])
+        print('filename', filename)
+        print('evidence', evidence)
+        print('N=',N)
+    else:
+        print('Check your input.')
+        return
+
+    random.seed(10)
+
+    # solver = ParFilter("waterTable.txt")
+    # ev = [1,1,0,0,1,1,1,1,0,1]
+    # # ev = [0, 0, 1]
+
+    rep = 3
+    ev = [int(e) for e in evidence]
+    solver = ParFilter(filename)
     print('Filtering days:', len(ev))
-    out = solver.par_filtering(ev, N=10**5, repeat=5)
+    out = solver.par_filtering(ev, N=N, repeat=rep)
     print('Filtering resutl:', out[0])
     print('Error:', 3*out[1])
 
