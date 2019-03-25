@@ -1,0 +1,21 @@
+p(x_0 is low) = 0.3333333333
+p(x_0 is med) = 0.3333333334
+p(x_0 is high) = 0.3333333333
+
+p(x_{t+1} is low | x_t is low) = 0.6
+p(x_{t+1} is med | x_t is low) = 0.35
+p(x_{t+1} is high | x_t is low) = 0.05
+p(x_{t+1} is low | x_t is med) = 0.2
+p(x_{t+1} is med | x_t is med) = 0.6
+p(x_{t+1} is high | x_t is med) = 0.2
+p(x_{t+1} is low | x_t is high) = 0
+p(x_{t+1} is med | x_t is high) = 0.5
+p(x_{t+1} is high | x_t is high) = 0.5
+
+p(e_t is flooded | x_t is low) = 0
+p(e_t is ~flooded | x_t is low) = 1
+p(e_t is flooded | x_t is med) = 0.05
+p(e_t is ~flooded | x_t is med) = 0.95
+p(e_t is flooded | x_t is high) = 0.4
+p(e_t is ~flooded | x_t is high) = 0.6
+
